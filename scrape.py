@@ -20,7 +20,7 @@ for i, l in enumerate(links):
     f = open(filename, 'w')
     url = "http://hckrnews.com/data/%s" % (l)
     rs = requests.get(url)
-    dailynews = rs.text.encode('utf-8')
+    dailynews = rs.text
     f.write(dailynews)
     f.close
     print "============ " + str(i) + "/" + str(linksNo) + " ============\r",

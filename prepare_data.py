@@ -16,13 +16,16 @@ for f in filenames:
   fname = re.sub('.json', '', f)
 
   for story in daily_stories_data:
-    if story["points"]:
+    if story["points"] and story["date"]:
       # save only time, no date
       t = datetime.utcfromtimestamp(story["date"])
-      time_string = "{:%H%M%S}".format(t)
-      time = 1000000 + int(time_string)
+      # time_string = "{:%H%M%S}".format(t)
+      # time = 1000000 + int(time_string)
 
-      s = { "points": story["points"], "date": time, "id": story["id"] }
+      #save only day of the week
+      time = datetime.strptime(str(t), '%Y-%m-%d %H:%M:%S').strftime('%w')
+
+      s = { "points": story["points"], "date": str(time), "id": story["id"] }
       prepared_daily_stories.append(s)
 
   prepared_all_stories[fname] = prepared_daily_stories

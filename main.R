@@ -9,16 +9,15 @@ date_vector <- NULL
 
 data_length <- length(data)
 
-for (i in 1:365) {
+for (i in 1300:1721) {
   for (d in data[[i]]) {
-    points_vector <- append(points_vector, as.numeric(d$points))
-    date_vector <- append(date_vector, d$date)
+    date_vector <- append(date_vector, as.numeric(d$date))
   }
 }
 
-points <- points_vector
-names(points) <- date_vector
+print(max(table(date_vector)))
 
-plot(date_vector, points_vector)
 
-# barplot(points)
+days <- expression(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)
+
+barplot(table(date_vector), names.arg=days, cex.names=0.6, ylim=c(0, 1.5 * max(table(date_vector))))
